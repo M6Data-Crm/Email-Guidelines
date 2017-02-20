@@ -330,63 +330,168 @@ kbd {
 
 <h1 id="toc_0">Data-CRM 6play Email Guidelines</h1>
 
-<h2 id="toc_1">Development Guidelines : back to 1999</h2>
+<h2 id="toc_1">Objectifs :</h2>
+
+<ul>
+<li>Garantir un bon niveau de déliverabilité,</li>
+<li>Offrir le meilleur rendu possible, quelle que soit la plateforme de destination : webmail, FAI, desktop, mobile...</li>
+<li>Respecter la charte graphique 6play,</li>
+<li>D&#39;une manière générale, participer à la meilleure expérience d&#39;utilisation possible.</li>
+</ul>
+
+<h2 id="toc_2">Development Guidelines : back to 1999</h2>
 
 <p>L&#39;intégration HTML spécifique aux emails, est très éloignée de l&#39;intégration html5 pratiquée aujourd&#39;hui en développement front end et très proche de ce qui se pratiquait au siècle dernier quand on ignorait les feuilles de style externes et le concept DRY (Don&#39;t Repeat Yourself).</p>
 
-<h3 id="toc_2">Des <code>&lt;table&gt;</code>, pas des <code>&lt;div&gt;</code></h3>
+<h3 id="toc_3">L&#39;encodage HTML</h3>
 
-<p>La structure doit être apportée par des balises <code>&lt;table&gt;</code> et non pas des <code>&lt;div&gt;</code> qui risquent d&#39; être mal interprétées par les FAI, clients email ou webmails, voire pas du tout. Autant que possible, il fait veiller à régler les cellspacing et cellpadding à 0.</p>
+<h4 id="toc_4">Des <code>&lt;table&gt;</code>, pas des <code>&lt;div&gt;</code></h4>
 
-<h3 id="toc_3">Attention aux <code>&lt;td&gt;</code> et <code>&lt;tr&gt;</code></h3>
+<p>La structure doit être apportée par des balises <code>&lt;table&gt;</code> et non pas des <code>&lt;div&gt;</code> qui risquent d&#39; être mal interprétées par les FAI, clients email ou webmails, voire pas du tout.</p>
 
-<p>indiquer les largeurs à chaque <code>&lt;td&gt;</code>.</p>
+<p>Autant que possible, il fait veiller à régler les cellspacing et cellpadding à 0.</p>
 
-<h2 id="toc_4">Styleguide</h2>
+<h4 id="toc_5">Attention aux <code>&lt;td&gt;</code> et <code>&lt;tr&gt;</code></h4>
+
+<p>L&#39;idéal est d&#39;indiquer les largeurs à chaque <code>&lt;td&gt;</code>.</p>
+
+<p>Du côté des balises <code>&lt;tr&gt;</code>, il est déconseillé de les empiler et il est recommandé d&#39;utiliser à la place des balises <code>&lt;table&gt;</code> indépendantes.</p>
+
+<p>Enfin, aucun élément de style ne doit être inclus dans les balises <code>&lt;tr&gt;</code>.</p>
+
+<h4 id="toc_6">Elément de style dans <code>&lt;body&gt;</code></h4>
+
+<p>Ils seront systématiquement ignorés par la grande majorité des webmails. Lorsqu&#39;il s&#39;agit d&#39;indiquer une couleur d&#39;arrière-plan, il est possible de contourner le problème en utilisant cet attribut dans l&#39;élément <code>&lt;table&gt;</code>, même s&#39;il ne s&#39;agit juste que d&#39;une table-container.</p>
+
+<h4 id="toc_7">Attributs &quot;Float&quot;</h4>
+
+<p>Ils poseront indubitablement toutes sortes de problèmes. Ils ne s&#39;affichent que très rarement correctement.</p>
+
+<h4 id="toc_8"><code>&lt;p&gt;</code> ou <code>&lt;span&gt;</code></h4>
+
+<p>La balise <code>&lt;span style=&quot;block;&quot;&gt;</code> devra être utilisée aussi souvent que possible. La balise de paragraphe <code>&lt;p&gt;</code> donne des résultats d&#39;affichage irréguliers, notamment en matière d&#39;interlignage.</p>
+
+<h4 id="toc_9">Raccourcis CSS</h4>
+
+<p>Ils ne sont pas interprétés, il faut donc éviter les syntaxes du type : &quot;font: 10px/16px #000 Arial&quot;. Les attributs de style doivent être renseignés de façon individuelle (font-size, color, font-family...).</p>
+
+<h4 id="toc_10">Titres</h4>
+
+<p>On préférera le vieil élément <code>&lt;span&gt;</code> aux balises de titre <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>... </p>
+
+<h4 id="toc_11">Centrage, Alignements...</h4>
+
+<p>L&#39;usage de l&#39;attribut &quot;align=&quot; dans une table est à privilégier. L&#39;usage de la balise <code>&lt;center&gt;</code> est à éviter.</p>
+
+<p>Par ailleurs, chaque élément <code>&lt;td&gt;</code> contenant du texte devra idéalement contenir cet attribut dûment renseigné.</p>
+
+<h4 id="toc_12">Images affichées en tant qu&#39;éléments &quot;block&quot;</h4>
+
+<p>Les images sont supposées être des éléments &quot;block&quot; par défaut, mais malgré cela, certains clients email demande une spécification (display:block;).</p>
+
+<h4 id="toc_13">Attribut &quot;alt&quot;</h4>
+
+<p>C&#39;est toujours mieux de le renseigner, il améliore l&#39;expérience utilisateur des destinataires ayant le blocage des images activé sur leur client email. C&#39;est également un moyen d&#39;optimiser le ration image/code du message.</p>
+
+<h4 id="toc_14">Mise en forme du texte</h4>
+
+<p>Les éléments textuels doivent être stylisés un par un, séparément. C&#39;est le seul moyen d&#39;éviter l&#39;écueil de l&#39;horrible typo par défaut de certains clients email.</p>
+
+<h3 id="toc_15">Autres bonnes pratiques d&#39;intégration</h3>
+
+<h4 id="toc_16">Pas d&#39;image d&#39;arrière-plan</h4>
+
+<p>A éviter, absolument. Cette pratique dégrade le ratio image/code d&#39;une part et offre un rendu très inégal suivant les boitres de réception.</p>
+
+<h4 id="toc_17">Lien miroir vers une version hébergée, lien de désabonnement</h4>
+
+<p>C&#39;est l&#39;évidence même, mais c&#39;est mieux quand c&#39;est écrit.</p>
+
+<h4 id="toc_18">Validation</h4>
+
+<p>Bien entendu, l&#39;opération de validation du code devra se faire en XHTML Transitional et non pas en html5.</p>
+
+<h2 id="toc_19">Styleguide : sobriété obligatoire</h2>
 
 <p>Le design appliqué aux emails doit obéir à certaines bonnes pratiques afin de garantir un bon niveau de déliverabilité. Il doit aussi s&#39;adapter aux contraintes de développement évoquées plus haut.</p>
 
-<h3 id="toc_5">Dimensions</h3>
+<h3 id="toc_20">Dimensions</h3>
 
-<p>La largeur idéale se situe entre 600 et 800 pixels. La hauteur est sans importance, le scrolling étant généralement admis. Toutefois, l&#39;incidence sur le poids du fichier n&#39;est pas à négliger.</p>
+<p>La largeur idéale se situe entre 600 et 800 pixels. Toutefois, il semble que les largeurs arrondies à un chiffre rond soient à privilégier.</p>
 
-<h3 id="toc_6">Layout</h3>
+<p>La hauteur est sans importance, le scrolling étant généralement admis. Toutefois, l&#39;incidence sur le poids du fichier n&#39;est pas à négliger.</p>
 
-<p>Sont préférés par les boites de réception les designs à base de grids, avec une préférence pour les construction en 1 colonne quand c&#39;est possible. Les éléments comportant des positionnements et des floats sont à proscrire.</p>
+<h3 id="toc_21">Layout</h3>
 
-<h3 id="toc_7">Images</h3>
+<h4 id="toc_22">Grilles et colonnes</h4>
 
-<h4 id="toc_8">A anticiper</h4>
+<p>Sont préférés par les boites de réception les designs à base de grids, avec une préférence pour les construction en 1 colonne quand c&#39;est possible. Les éléments comportant des positionnements et des floats sont à proscrire (cf. voir plus haut).</p>
+
+<h4 id="toc_23">Éléments visuels</h4>
+
+<p>Ils doivent rester le plus simple possible et ne doivent absolument pas se chevaucher.</p>
+
+<h3 id="toc_24">Contenu</h3>
+
+<h4 id="toc_25">Hiérarchie</h4>
+
+<p>L&#39;importance doit être décroissante de bas en haut, à la manière des articles de blog.</p>
+
+<h4 id="toc_26">Style</h4>
+
+<p>Un style concis et percutant est requis. Les premiers mots sont à soigner particulièrement puisqu&#39;ils sont amenés à être repris en extrait.</p>
+
+<h3 id="toc_27">Images</h3>
+
+<h4 id="toc_28">A anticiper</h4>
 
 <p>Il faut anticiper le fait que les images sont souvent bloquées par certains clients email, et que les images de grande taille (background par exemple) ne se chargeront tout simplement pas du tout.</p>
 
-<h4 id="toc_9">Poids</h4>
+<h4 id="toc_29">Poids</h4>
 
 <p>Afin de garantir le poids le plus faible pour ces fichiers, le meilleur compromis qualité/poids doit être recherché. Une dégradation systématique doit être opérée.</p>
 
-<h4 id="toc_10">Nombre</h4>
+<p>A titre d&#39;exemple, un .jpg de 500px x 500px devrait peser aux alentours de 100ko.</p>
+
+<h4 id="toc_30">Nombre</h4>
 
 <p>Un bon ratio image/code devant être respecté, il faut être très attentif au fait de ne pas surcharger l&#39;email en images. Les messages constitués d&#39;une image unique sont à proscrire totalement.</p>
 
-<h3 id="toc_11">Typographie</h3>
+<h3 id="toc_31">Typographie</h3>
+
+<h4 id="toc_32">Polices</h4>
 
 <p>Les polices web basiques cross platform sont à privilégier : Arial, Verdana, Georgia, and Times New Roman. C&#39;est triste, mais c&#39;est comme ça.</p>
 
-<h3 id="toc_12">Flash, JavaScript</h3>
+<h4 id="toc_33">Taille</h4>
+
+<p>Les tailles doivent être exprimées en pixel (nombre entier), et ne doivent pas être inférieures à 10px pour les textes constituant le corps du message.</p>
+
+<h3 id="toc_34">Flash, JavaScript</h3>
 
 <p>Flash et JavaScript sont à éviter. Pour les animations, seul l&#39;usage du  format .gif sera sans conséquence sur la déliverabilité.</p>
 
-<h3 id="toc_13">Responsiveness</h3>
+<h3 id="toc_35">Responsiveness</h3>
 
 <p>L&#39;expérience de lecture sur mobile doit absolument être prise en considération : temps de chargement réduit, taille des boutons/liens cliquables...</p>
 
-<h2 id="toc_14">Pour aller plus loin</h2>
+<h2 id="toc_36">Charte graphique 6play</h2>
+
+<h2 id="toc_37">Axes de réflexion</h2>
+
+<h3 id="toc_38">Tests</h3>
+
+<ul>
+<li>Envisager le recours à un service de test tel que <a href="https://litmus.com/">Litmus</a>.</li>
+</ul>
+
+<h2 id="toc_39">Pour aller plus loin</h2>
 
 <p>Si vous souhaitez en savoir davantage :</p>
 
 <ul>
 <li><a href="https://templates.mailchimp.com/getting-started/html-email-basics/">Les recommandations MailChimp</a></li>
-<li></li>
+<li><a href="https://gist.github.com/unruthless/11383824">Les recommandations d&#39;Unruthless</a></li>
 </ul>
 
 
