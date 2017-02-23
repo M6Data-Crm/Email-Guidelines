@@ -156,4 +156,4 @@ Si vous souhaitez en savoir davantage :
 
 * [Les recommandations MailChimp](https://templates.mailchimp.com/getting-started/html-email-basics/)
 * [Les recommandations d'Unruthless](https://gist.github.com/unruthless/11383824)
- 
+* [Les recommandations Emarsys](http://documentation.emarsys.com/fr/resource/b2c-cloud/email/html-guidelines/)
